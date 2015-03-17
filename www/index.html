@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="generator"
+    content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+		<title>Nacho Time!</title>
+		<meta charset="utf-8" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="msapplication-tap-highlight" content="no" />
+		<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" />
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+		<script src="js/jquery-2.1.3.min.js"></script>
+		<script src="js/jquery.mobile-1.4.5.min.js"></script>
+		<script type="text/javascript" src="js/jquery.dotdotdot.min.js"></script>
+		<!-- <script type="text/javascript" src="js/truncate.js"></script> -->
+		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="js/main-imdb.js"></script>
+		
+	</head>
+	<body>
+		<div data-role="page" id="main-page">
+			<div data-role="header" data-position="fixed">
+				<h1>EetNU Gids</h1>
+			</div>
+			<div data-role="content">
+				<div class="type-container">
+					<a href="#item-list" data-role="button">Restaurants</a> 
+				</div>
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h4></h4>
+			</div>
+		</div>
+		<!-- END MAIN PAGE -->
+
+		<!-- ITEM LIST -->
+		<div data-role="page" id="item-list">
+			<div data-role="header" data-position="fixed">
+				<h1>EetNU Gids</h1>
+			</div>
+			<div data-role="content">
+				<ul class="content-list" data-role="listview" data-filter="true" data-filter-placeholder="Zoek op naam">
+				</ul>
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h4></h4>
+			</div>
+		</div>
+		<div data-role="page" id="detail-page">
+			<div data-role="header" data-rel="back" data-position="fixed">
+				<h1>Nacho Time</h1>
+			</div>
+			<div data-role="content">
+				<div id="item-img-container" style="text-align: center;margin: 0 auto; " >
+
+				</div>
+				<div class="ui-body ui-body-a">
+					<span>Title: <span id="item-title"></span></span>
+					<div id="item-description">
+					</div>
+					<div id="item-phonenumber">
+					<a href=""></a>
+					</div>
+
+				</div>		
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h4>Your own IMDB!</h4>
+			</div>
+		</div>	
+
+	</body>
+</html>
