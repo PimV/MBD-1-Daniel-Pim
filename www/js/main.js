@@ -162,12 +162,48 @@ function attachListeners() {
 	});
 }
 
+function createRatingIcons(itemRating) {
+	var starArray = [
+		'<i class="fa fa-star-o"></i>',
+		'<i class="fa fa-star-o"></i>',
+		'<i class="fa fa-star-o"></i>',
+		'<i class="fa fa-star-o"></i>',
+		'<i class="fa fa-star-o"></i>'
+	];
+	var stars = itemRating % 10;
+	var halfstars = stars % 2;
+	var fullstars = (stars - halfstars) / 2;
+	
+	var myString = "";
+	
+	for (var i = 0; i < 5; i++) {
+		if (fullstars > 0) {
+			fullstars--;
+			starArray[i] = '<i class="fa fa-star"></i>';
+		} else if (halfstars > 0) {
+			halfstars--;
+			starArray[i] = '<i class="fa fa-star-half-o"></i>';
+		}
+		
+		myString += starArray[i];
+	}
+	console.log(myString);
+	return myString;
+}
+
+
 function loadDetailPage(item) {
 	$('#item-title').text(item.name);
 
+	$('#rating-value').html(createRatingIcons(item.rating));
+	
 	$('#item-description').text(item.description);
-	$('#item-phonenumber').empty();
-	$('#item-phonenumber').append('<a href="tel:' + item.telephone + '">' + item.telephone + '</a>');
+	//$('#item-phonenumber').empty();
+	$('#item-phonenumber').html('<a href="tel:' + item.telephone + '">' + item.telephone + '</a>');
+	
+	//$('#item-website').empty();
+	$('#item-website').html('<a href="' + item.website_url + '">' + item.website_url + '</a>');
+	
 	$('#item-img-container').empty();
 	$('#item-img-container').append('<img style="border-style: groove;" src="' + item.images.original[0] + '" height="150" height="150">');
 }
