@@ -124,7 +124,8 @@ function loadClosebyRestaurants(pageNr, perPage) {
 				if (element.images.original.length < 1) {
 					element.images.original.push("img/no-img.jpg");
 				}
-				items += '<li><a id="' + element.id + '"  href="#detail-page"><img class="ui-li-thumb" src="' + element.images.original[0] + '">' + element.name + '</a></li>';
+				element.distance = (element.distance / 1000).toFixed(1);
+				items += '<li><a id="' + element.id + '"  href="#detail-page"><img class="ui-li-thumb" src="' + element.images.original[0] + '"><div>' + element.name + '</div><div><small>' + element.distance + ' km</small></div></a></li>';
 			});
 			results.items = items;
 			$(".content-list").append(items).listview('refresh');
