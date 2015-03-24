@@ -14,12 +14,17 @@ $(document).ready(function () {
 	$('#close-by-restaurants-button').on('click', function(e) {
 		//Empty list
 		$('.content-list').empty();
-
+		currentPage = 1;
+		perPage = 10;
 		//Get geolocation information
-		window.localStorage.setItem("lat", "51.55");
+
+		// Test purposes only
+/*		window.localStorage.setItem("lat", "51.55");
 		window.localStorage.setItem("lon", "5.7");
-		window.localStorage.setItem("currentFilter", "close-by");
-		//navigator.geolocation.getCurrentPosition(onSuccess, onError);
+		window.localStorage.setItem("currentFilter", "close-by");*/
+		
+
+		navigator.geolocation.getCurrentPosition(onSuccess, onError);
 
 		//Navigate to page
 		$.mobile.pageContainer.pagecontainer("change", "#item-list");
@@ -28,14 +33,15 @@ $(document).ready(function () {
 
 	$('#all-restaurants-button').on('click', function(e) {
 		$('.content-list').empty();
+		currentPage = 1;
+		perPage = 10;
 		window.localStorage.setItem("currentFilter", "all");
 		$.mobile.pageContainer.pagecontainer("change", "#item-list");	
 		
 	});
 
 	$('#item-list').bind('pagebeforeshow', function() {
-		currentPage = 1;
-		perPage = 10;
+
 		filter = window.localStorage.getItem("currentFilter");
 		if (filter === "close-by") {
 			loadClosebyRestaurants(currentPage++, perPage);
@@ -80,7 +86,15 @@ function loadRestaurants(pageNr, perPage) {
 				if (element.images.original.length < 1) {
 					element.images.original.push("img/no-img.jpg");
 				}
-				items += '<li><a id="' + element.id + '"  href="#detail-page"><img class="ui-li-thumb" src="' + element.images.original[0] + '">' + element.name + '</a></li>';
+			/*	items += '<li>'+ 
+							'<a id="' + element.id + '"  href="#detail-page">' +										//anchor link
+								'<img class="ui-li-thumb" src="' + element.images.original[0] + '">' + 					//image
+								'<div>' + element.name + '</div>' +														//name
+								'<div><small>Waardering: ' + createRatingIcons(element.rating) + '</small></div>' +		//rating
+								'<div><small>' + element.distance + ' km</small></div>'+								//distance
+							'</a>'+
+						'</li>';*/
+						items += createListEntry(element);
 			});
 			results.items = items;
 			$(".content-list").append(items).listview('refresh');
@@ -124,14 +138,44 @@ function loadClosebyRestaurants(pageNr, perPage) {
 				if (element.images.original.length < 1) {
 					element.images.original.push("img/no-img.jpg");
 				}
-				element.distance = (element.distance / 1000).toFixed(1);
-				items += '<li><a id="' + element.id + '"  href="#detail-page"><img class="ui-li-thumb" src="' + element.images.original[0] + '"><div>' + element.name + '</div><div><small>' + element.distance + ' km</small></div></a></li>';
+				//element.distance = (element.distance / 1000).toFixed(1);
+	/*			items += '<li>'+ 
+							'<a id="' + element.id + '"  href="#detail-page">' +										//anchor link
+								'<img class="ui-li-thumb" src="' + element.images.original[0] + '">' + 					//image
+								'<div>' + element.name + '</div>' +														//name
+								'<div><small>Waardering: ' + createRatingIcons(element.rating) + '</small></div>' +		//rating
+								'<div><small>' + element.distance + ' km</small></div>'+								//distance
+							'</a>'+
+						'</li>';*/
+						items += createListEntry(element);
 			});
 			results.items = items;
 			$(".content-list").append(items).listview('refresh');
 			attachListeners();
 		}
 	});
+}
+
+function createListEntry(element) {
+
+	if (element.images.original.length < 1) {
+			element.images.original.push("img/no-img.jpg");
+		}
+	element.distance = (element.distance / 1000).toFixed(1);
+
+	var listEntry = '<li>' +
+						'<a id="' + element.id + '"  href="#detail-page">' +										//anchor link
+							'<img class="ui-li-thumb" src="' + element.images.original[0] + '">' + 					//image
+							'<div>' + element.name + '</div>' +														//name
+							'<div><small>Waardering: ' + createRatingIcons(element.rating) + '</small></div>';
+
+	if (!isNaN(element.distance)) {
+		listEntry += 		'<div><small>' + element.distance + ' km</small></div>';								//distance
+	}
+	listEntry +=	'</a>'+
+				'</li>';
+	return listEntry;
+
 }
 
 function loadSingleRestaurant(id) {
@@ -164,14 +208,18 @@ function attachListeners() {
 }
 
 function createRatingIcons(itemRating) {
+	if (itemRating === null) {
+		return "-";
+	}
+
 	var starArray = [
-		'<i class="fa fa-star-o"></i>',
-		'<i class="fa fa-star-o"></i>',
-		'<i class="fa fa-star-o"></i>',
-		'<i class="fa fa-star-o"></i>',
-		'<i class="fa fa-star-o"></i>'
+		'<i class="fa fa-star-o" style="color: gold"></i>',
+		'<i class="fa fa-star-o" style="color: gold"></i>',
+		'<i class="fa fa-star-o" style="color: gold"></i>',
+		'<i class="fa fa-star-o" style="color: gold"></i>',
+		'<i class="fa fa-star-o" style="color: gold"></i>'
 	];
-	var stars = itemRating % 10;
+	var stars = (itemRating / 10).toFixed(0);
 	var halfstars = stars % 2;
 	var fullstars = (stars - halfstars) / 2;
 	
@@ -180,30 +228,34 @@ function createRatingIcons(itemRating) {
 	for (var i = 0; i < 5; i++) {
 		if (fullstars > 0) {
 			fullstars--;
-			starArray[i] = '<i class="fa fa-star"></i>';
+			starArray[i] = '<i class="fa fa-star" style="color: gold"></i>';
 		} else if (halfstars > 0) {
 			halfstars--;
-			starArray[i] = '<i class="fa fa-star-half-o"></i>';
+			starArray[i] = '<i class="fa fa-star-half-o" style="color: gold"></i>';
 		}
 		
 		myString += starArray[i];
 	}
-	console.log(myString);
+
 	return myString;
 }
 
 
 function loadDetailPage(item) {
 	$('#item-title').text(item.name);
-
 	$('#rating-value').html(createRatingIcons(item.rating));
 	
 	$('#item-description').text(item.description);
-	//$('#item-phonenumber').empty();
-	$('#item-phonenumber').html('<a href="tel:' + item.telephone + '">' + item.telephone + '</a>');
 	
-	//$('#item-website').empty();
-	$('#item-website').html('<a href="' + item.website_url + '">' + item.website_url + '</a>');
+	$('#item-phonenumber').empty();
+	if (item.telephone) {
+		$('#item-phonenumber').html('<a href="tel:' + item.telephone + '">' + item.telephone + '</a>');
+	}
+
+	$('#item-website').empty();
+	if (item.website_url) {
+		$('#item-website').html('<a href="' + item.website_url + '">' + item.website_url + '</a>');
+	}
 	
 	$('#item-img-container').empty();
 	$('#item-img-container').append('<img style="border-style: groove;" src="' + item.images.original[0] + '" height="150" height="150">');
