@@ -4,7 +4,7 @@ var currentItems = 1;
 var initialItems = 10;
 var perPage = 10;
 var currentPage = 1;
-var filter = "all";
+var filter;
 
 $(document).ready(function () {
 	$('#item-description').dotdotdot({height: 150, watch: "window"});
@@ -12,21 +12,31 @@ $(document).ready(function () {
 	$(document).on("scrollstop", checkScroll);
 	
 	$('#close-by-restaurants-button').on('click', function(e) {
-		navigator.geolocation.getCurrentPosition(onSuccess, onError);
-		$.mobile.pageContainer.pagecontainer("change", "#item-list");
+		//Empty list
 		$('.content-list').empty();
-		filter = "close-by";
+
+		//Get geolocation information
+		window.localStorage.setItem("lat", "51.55");
+		window.localStorage.setItem("lon", "5.7");
+		window.localStorage.setItem("currentFilter", "close-by");
+		//navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
+		//Navigate to page
+		$.mobile.pageContainer.pagecontainer("change", "#item-list");
+		
 	});
 
 	$('#all-restaurants-button').on('click', function(e) {
-		$.mobile.pageContainer.pagecontainer("change", "#item-list");
 		$('.content-list').empty();
-		filter = "all";
+		window.localStorage.setItem("currentFilter", "all");
+		$.mobile.pageContainer.pagecontainer("change", "#item-list");	
+		
 	});
 
 	$('#item-list').bind('pagebeforeshow', function() {
 		currentPage = 1;
 		perPage = 10;
+		filter = window.localStorage.getItem("currentFilter");
 		if (filter === "close-by") {
 			loadClosebyRestaurants(currentPage++, perPage);
 		} else if (filter === "all") {
