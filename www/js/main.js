@@ -13,11 +13,13 @@ $(document).ready(function () {
 	
 	$('#close-by-restaurants-button').on('click', function(e) {
 		navigator.geolocation.getCurrentPosition(onSuccess, onError);
+		$.mobile.pageContainer.pagecontainer("change", "#item-list");
 		$('.content-list').empty();
 		filter = "close-by";
 	});
 
 	$('#all-restaurants-button').on('click', function(e) {
+		$.mobile.pageContainer.pagecontainer("change", "#item-list");
 		$('.content-list').empty();
 		filter = "all";
 	});
@@ -85,13 +87,15 @@ function loadClosebyRestaurants(pageNr, perPage) {
 	if (!pageNr) {
 		pageNr = 1;
 	}
-	https://api.eet.nu/venues?geolocation=51.55,5.7&sort_by=distance
+
+
+
 	$.ajax({
 		type: "GET",
 		data: {
 			page: pageNr,
 			per_page: perPage,
-			geolocation: window.localStorage.get("lat") + "," + window.localStorage.get("lon"),
+			geolocation: window.localStorage.getItem("lat") + "," + window.localStorage.getItem("lon"),
 			sort_by: "distance"
 		},
 		url:       'https://api.eet.nu/venues/',

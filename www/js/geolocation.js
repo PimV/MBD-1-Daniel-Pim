@@ -7,7 +7,7 @@
 var onSuccess = function(position) {
     window.localStorage.setItem("lat", position.coords.latitude);
     window.localStorage.setItem("lon", position.coords.longitude);
-
+/*
     alert('Latitude: '          + position.coords.latitude          + '\n' +
           'Longitude: '         + position.coords.longitude         + '\n' +
           'Altitude: '          + position.coords.altitude          + '\n' +
@@ -15,7 +15,7 @@ var onSuccess = function(position) {
           'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
           'Heading: '           + position.coords.heading           + '\n' +
           'Speed: '             + position.coords.speed             + '\n' +
-          'Timestamp: '         + position.timestamp                + '\n');
+          'Timestamp: '         + position.timestamp                + '\n');*/
 };
 
 // onError Callback receives a PositionError object
