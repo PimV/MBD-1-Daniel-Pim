@@ -39,8 +39,8 @@
 		<!-- END MAIN PAGE -->
 
 		<!-- ITEM LIST -->
-		<div data-role="page" id="item-list">
-			<div data-role="header" data-position="fixed">
+		<div data-role="page" id="item-list" >
+			<div data-role="header" data-position="fixed" data-add-back-btn="true" data-back-btn-text="">
 				<h1>EetNU Gids</h1>
 			</div>
 			<div data-role="content">
@@ -52,14 +52,14 @@
 			</div>
 		</div>
 		<div data-role="page" id="detail-page">
-			<div data-role="header" data-rel="back" data-position="fixed">
+			<div data-role="header" data-position="fixed" data-add-back-btn="true" data-back-btn-text="">
 				<h1>EetNU Gids</h1>
 			</div>
 			<div data-role="content">
 				<div>
-					<div id="item-img-container">
+					<div id="item-img-container" style="max-width: 40%">
 					</div>
-					<div id="item-short-info">
+					<div id="item-short-info" style="max-width: 60%">
 					</div>
 				</div>
 				<!-- ALGEMENE INFORMATIE PANEL -->
@@ -84,6 +84,22 @@
 					</div>
 
 				</div>	
+				<div class="ui-bar ui-bar-a">
+					<h3>Adresgegevens</h3>
+				</div>
+				<div class="ui-body ui-body-a">
+					<div id="item-street">
+					</div>
+					<div id="item-zipcode">
+					</div>
+					<div id="item-city">
+					</div>
+					<div id="item-region">
+					</div>
+					<div id="item-country">
+					</div>
+
+				</div>
 				<!-- CONTACT PANEL -->	
 				<div class="ui-bar ui-bar-a">
 					<h3>Contact</h3>

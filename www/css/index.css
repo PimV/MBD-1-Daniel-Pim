@@ -23,7 +23,7 @@
 .ui-page {
 	-webkit-backface-visibility: hidden;
 }
-
+/*
 body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
@@ -46,7 +46,7 @@ body {
     margin:0px;
     padding:0px;
     width:100%;
-}
+}*/
 
 /* Portrait layout (default) */
 .app {
@@ -72,7 +72,7 @@ body {
     }
 }
 
-h1 {
+/*h1 {
     font-size:24px;
     font-weight:normal;
     margin:0px;
@@ -80,7 +80,7 @@ h1 {
     padding:0px;
     text-align:center;
 }
-
+*/
 .event {
     border-radius:4px;
     -webkit-border-radius:4px;
@@ -127,4 +127,12 @@ h1 {
 
 a.less {
     display: none;
+}
+
+.ui-toolbar-back-btn {
+    background-color: inherit !important;
+    border: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    height: 1em;
 }

@@ -265,10 +265,35 @@ function loadDetailPage(item) {
 		$('#item-website').html('<a href="' + item.website_url + '">' + item.website_url + '</a>');
 	}
 	
+	$('#item-street').empty();
+	if (item.address.street) {
+		$('#item-street').html('<span>' + item.address.street + '</span>');
+	}
+
+	$('#item-zipcode').empty();
+	if (item.address.zipcode) {
+		$('#item-zipcode').html('<span>' + item.address.zipcode + '</span>');
+	}
+
+	$('#item-city').empty();
+	if (item.address.city) {
+		$('#item-city').html('<span>' + item.address.city + '</span>');
+	}
+
+	$('#item-region').empty();
+	if (item.address.region) {
+		$('#item-region').html('<span>' + item.address.region + '</span>');
+	}
+
+	$('#item-country').empty();
+	if (item.address.country) {
+		$('#item-country').html('<span>' + item.address.country + '</span>');
+	}
+	
 	$('#item-img-container').empty();
 	$('#item-img-container').append('<img style="border-style: groove;" src="' + item.images.original[0] + '" height="100" height="100">');
 
-	$('#item-short-info').html("Sterren: " + createRatingIcons(item.rating) + "<br/> Rating: " + item.rating + "/100");
+	$('#item-short-info').html("<h2>" + item.name +"</h2>Sterren: " + createRatingIcons(item.rating) + "<br/> Rating: " + item.rating + "/100");
 }
 
 function checkScroll() {
