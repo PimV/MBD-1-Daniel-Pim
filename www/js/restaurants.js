@@ -16,6 +16,7 @@ $(document).ready(function () {
 		$('.content-list').empty();
 		currentPage = 1;
 		perPage = 10;
+		window.localStorage.setItem("currentFilter", "close-by");
 		//Get geolocation information
 
 		// Test purposes only
@@ -267,7 +268,7 @@ function loadDetailPage(item) {
 	$('#item-img-container').empty();
 	$('#item-img-container').append('<img style="border-style: groove;" src="' + item.images.original[0] + '" height="100" height="100">');
 
-	$('#item-short-info').html("Sterren: " + createRatingIcons(item.rating));
+	$('#item-short-info').html("Sterren: " + createRatingIcons(item.rating) + "<br/> Rating: " + item.rating + "/100");
 }
 
 function checkScroll() {
