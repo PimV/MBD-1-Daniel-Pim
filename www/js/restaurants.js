@@ -181,10 +181,10 @@ function loadSingleRestaurant(id) {
 
 function attachListeners() {
 	//Remove any click-listeners.sdf
-	$('.content-list > li').off('tap swiperight');
+	$('.content-list > li').off('click swiperight');
 	
 	//Attach new click-listeners
-	$('.content-list > li').on('tap swiperight', function() {
+	$('.content-list > li').on('click swiperight', function() {
 		//$(this).off('click');
 		var id = $(this).find("a:first").attr('id');
 		var type = $(this).find("a:first").attr('data-type');
