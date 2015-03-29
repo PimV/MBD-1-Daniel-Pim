@@ -28,8 +28,9 @@
 			<div data-role="content">
 
 					<ul data-role="listview" class="button-list">
-						<li id="all-restaurants-button"><a href="#item-list" data-role="button">Alle restaurants</a></li>
-						<li id="close-by-restaurants-button"><a href="#item-list" data-role="button">Restaurants in de buurt</a> </li>
+						<li id="all-restaurants-button"><a data-role="button">Alle restaurants</a></li>
+						<li id="close-by-restaurants-button"><a data-role="button">Restaurants in de buurt</a> </li>
+						<li id="settings-button"><a href="#settings" data-role="button">Instellingen</a> </li>
 					</ul>
 			</div>
 			<div data-role="footer" data-position="fixed" data-tap-toggle="false">
@@ -37,7 +38,20 @@
 			</div>
 		</div>
 		<!-- END MAIN PAGE -->
-
+		<div data-role="page" id="settings" >
+			<div data-role="header" data-position="fixed">
+				<h1>EetNU Gids</h1>
+			</div>
+			<div data-role="content">
+				<ul data-role="listview">
+					<li data-icon="false" id="get-location-button"><a>Haal locatie op <i style="float: right" class="fa fa-location-arrow"></i></a></li>
+					<li data-icon="false" id="remove-cache-button"><a>Verwijder cache <i style="float: right" class="fa fa-trash-o"></i></a></li>
+				</ul>
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h4></h4>
+			</div>
+		</div>
 		<!-- ITEM LIST -->
 		<div data-role="page" id="item-list" >
 			<div data-role="header" data-position="fixed" data-add-back-btn="true" data-back-btn-text="">

@@ -11,7 +11,7 @@ $(document).ready(function () {
 	
 	$(document).on("scrollstop", checkScroll);
 	
-	$('#close-by-restaurants-button').on('click', function(e) {
+	$('#close-by-restaurants-button').on('tap swiperight', function(e) {
 		//Empty list
 		$('.content-list').empty();
 		currentPage = 1;
@@ -28,16 +28,16 @@ $(document).ready(function () {
 		navigator.geolocation.getCurrentPosition(onSuccess, onError);
 
 		//Navigate to page
-		$.mobile.pageContainer.pagecontainer("change", "#item-list");
+		$.mobile.pageContainer.pagecontainer("change", "#item-list", {transition: "slide"});
 		
 	});
 
-	$('#all-restaurants-button').on('click', function(e) {
+	$('#all-restaurants-button').on('tap swiperight', function(e) {
 		$('.content-list').empty();
 		currentPage = 1;
 		perPage = 10;
 		window.localStorage.setItem("currentFilter", "all");
-		$.mobile.pageContainer.pagecontainer("change", "#item-list");	
+		$.mobile.pageContainer.pagecontainer("change", "#item-list", {transition: "slide"});	
 		
 	});
 
@@ -147,7 +147,8 @@ function createListEntry(element) {
 	element.distance = (element.distance / 1000).toFixed(1);
 
 	var listEntry = '<li>' +
-						'<a id="' + element.id + '"  href="#detail-page">' +										//anchor link
+						// '<a id="' + element.id + '"  href="#detail-page">' +										//anchor link
+						'<a id="' + element.id + '">' +										//anchor link
 							'<img class="ui-li-thumb" src="' + element.images.original[0] + '">' + 					//image
 							'<div>' + element.name + '</div>' +														//name
 							'<div><small>Waardering: ' + createRatingIcons(element.rating) + '</small></div>';
@@ -172,6 +173,7 @@ function loadSingleRestaurant(id) {
 					response.images.original.push("img/no-img.jpg");
 				}
 			loadDetailPage(response);
+			$.mobile.pageContainer.pagecontainer("change", "#detail-page", {transition: "slide"});
 		}
 	});
 	
@@ -179,13 +181,13 @@ function loadSingleRestaurant(id) {
 
 function attachListeners() {
 	//Remove any click-listeners.sdf
-	$('.content-list > li > a').off('click');
+	$('.content-list > li').off('tap swiperight');
 	
 	//Attach new click-listeners
-	$('.content-list > li > a').on('click', function() {
+	$('.content-list > li').on('tap swiperight', function() {
 		//$(this).off('click');
-		var id = $(this).attr('id');
-		var type = $(this).attr('data-type');
+		var id = $(this).find("a:first").attr('id');
+		var type = $(this).find("a:first").attr('data-type');
 		loadSingleRestaurant(id);
 	});
 }

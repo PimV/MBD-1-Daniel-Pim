@@ -3,6 +3,13 @@
 // current GPS coordinates
 //
 
+$(document).ready(function () {
+
+  $('#get-location-button').on('tap', function(e) {
+      navigator.geolocation.getCurrentPosition(onSuccess, onError);  
+  });
+});
+
 
 var onSuccess = function(position) {
     window.localStorage.setItem("lat", position.coords.latitude);
